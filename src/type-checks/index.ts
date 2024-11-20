@@ -174,63 +174,34 @@ export const isTypeOrNil = <T>(
  * @returns 如果给定的值被认为是空，则返回true；否则返回false
  */
 export const isEmpty = (value: unknown): boolean => {
-  // 检查值是否为null或undefined
-  if (value === null || value === undefined) {
+  if (value == null) {
+    // Checks for null or undefined
     return true;
   }
 
-  // 根据值的类型进行不同的空检查
-  switch (typeof value) {
-    case 'object':
-      // 对于对象类型，进一步区分数组、Map、Set、Buffer和ArrayBuffer等类型
-      if (Array.isArray(value)) {
-        return value.length === 0;
-      }
-
-      if (value instanceof Map) {
-        return value.size === 0;
-      }
-
-      if (value instanceof Set) {
-        return value.size === 0;
-      }
-
-      if (value instanceof Buffer) {
-        return value.length === 0;
-      }
-
-      // 检查各种类型的ArrayBuffer和TypedArray
-      if (
-        value instanceof ArrayBuffer ||
-        value instanceof Uint8Array ||
-        value instanceof Int8Array ||
-        value instanceof Uint16Array ||
-        value instanceof Int16Array ||
-        value instanceof Uint32Array ||
-        value instanceof Int32Array ||
-        value instanceof Float32Array ||
-        value instanceof Float64Array
-      ) {
-        return value.byteLength === 0;
-      }
-
-      // 对于其他对象类型，通过Object.keys检查属性数量
-      return Object.keys(value).length === 0;
-
-    case 'string':
-      // 对于字符串，空意味着长度为零
-      return !value;
-
-    case 'number':
-      // 对于数字，空意味着是NaN
-      return isNaN(value);
-
-    case 'symbol':
-      // 对于符号，符号本身不能为空
-      return false;
-
-    // 对于其他未特别处理的类型，视为非空
-    default:
-      return false;
+  if (typeof value === 'number' && isNaN(value)) {
+    return true;
   }
+
+  if (typeof value === 'string' || Array.isArray(value)) {
+    // Checks for empty string or array
+    return value.length === 0;
+  }
+
+  if (value instanceof Map || value instanceof Set) {
+    // Checks for empty Map or Set
+    return value.size === 0;
+  }
+
+  if (value instanceof Date) {
+    // Checks for empty Date
+    return isNaN(value.getTime());
+  }
+
+  if (isObject(value)) {
+    // Checks for empty object
+    return Object.keys(value as object).length === 0;
+  }
+
+  return false;
 };

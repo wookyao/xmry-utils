@@ -26,7 +26,10 @@
   "license": "MIT",
   "scripts": {
     "build": "tsup",
-    "pub": "node ./scripts/publish.js"
+    "pub": "node ./scripts/publish.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "devDependencies": {
     "@eslint/js": "^9.15.0",
