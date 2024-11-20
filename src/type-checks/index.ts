@@ -6,9 +6,8 @@
  * @param value 任意类型的值，用于判断
  * @returns 如果值是字符串类型，则返回true；否则返回false
  */
-export const isString = (value: unknown): value is string => {
-  return typeof value === 'string';
-};
+export const isString = (value: unknown): value is string =>
+  typeof value === 'string';
 
 /**
  * 检查给定的值是否为数字。
@@ -20,9 +19,8 @@ export const isString = (value: unknown): value is string => {
  * @param value - 待检查的值，可以是任何类型。
  * @returns 返回一个布尔值，如果给定的值是一个有效的数字，则为true；否则为false。
  */
-export const isNumber = (value: unknown): value is number => {
-  return typeof value === 'number' && !isNaN(value);
-};
+export const isNumber = (value: unknown): value is number =>
+  typeof value === 'number' && !isNaN(value);
 
 /**
  * 判断给定的值是否为布尔类型
@@ -30,9 +28,8 @@ export const isNumber = (value: unknown): value is number => {
  * @param value 任意类型的值，用于判断
  * @returns 如果值是布尔类型，则返回true；否则返回false
  */
-export const isBoolean = (value: unknown): value is boolean => {
-  return typeof value === 'boolean';
-};
+export const isBoolean = (value: unknown): value is boolean =>
+  typeof value === 'boolean';
 
 /**
  * 判断给定值是否为非空且非数组的对象
@@ -43,9 +40,8 @@ export const isBoolean = (value: unknown): value is boolean => {
  * @param value 任意类型的值，用于判断其是否为非空且非数组的对象
  * @returns 如果值是对象且不是null也不是数组，则返回true；否则返回false
  */
-export const isObject = (value: unknown): value is object => {
-  return typeof value === 'object' && value !== null && !Array.isArray(value);
-};
+export const isObject = (value: unknown): value is object =>
+  typeof value === 'object' && value !== null && !Array.isArray(value);
 
 /**
  * 判断给定的值是否为数组
@@ -54,9 +50,8 @@ export const isObject = (value: unknown): value is object => {
  * @param value 待检查的值
  * @returns 如果给定的值是数组，则返回true；否则返回false
  */
-export const isArray = <T>(value: unknown): value is T[] => {
-  return Array.isArray(value);
-};
+export const isArray = <T>(value: unknown): value is T[] =>
+  Array.isArray(value);
 
 /**
  * 判断给定的值是否为函数
@@ -64,9 +59,9 @@ export const isArray = <T>(value: unknown): value is T[] => {
  * @param value 任意类型的值，用于判断是否为函数
  * @returns 如果值是函数类型，则返回true；否则返回false
  */
-export const isFunction = (value: unknown): value is Function => {
-  return typeof value === 'function';
-};
+export const isFunction = (value: unknown): value is Function =>
+  typeof value === 'function' &&
+  Object.prototype.toString.call(value) === '[object Function]';
 
 /**
  * 检查给定的值是否为 `undefined`。
@@ -74,9 +69,8 @@ export const isFunction = (value: unknown): value is Function => {
  * @param value 任意类型的值，将被检查是否为 `undefined`。
  * @returns 如果 `value` 是 `undefined`，则返回 `true`；否则返回 `false`。
  */
-export const isUndefined = (value: unknown): value is undefined => {
-  return typeof value === 'undefined';
-};
+export const isUndefined = (value: unknown): value is undefined =>
+  typeof value === 'undefined';
 
 /**
  * 检查给定的值是否为 null
@@ -84,9 +78,7 @@ export const isUndefined = (value: unknown): value is undefined => {
  * @param value 未知类型的值，用于检查是否为 null
  * @returns 如果给定的值为 null，则返回 true；否则返回 false
  */
-export const isNull = (value: unknown): value is null => {
-  return value === null;
-};
+export const isNull = (value: unknown): value is null => value === null;
 
 /**
  * 检查给定的值是否为一个有效的日期对象
@@ -94,9 +86,8 @@ export const isNull = (value: unknown): value is null => {
  * @param value 未知类型的值，待检查是否为日期对象
  * @returns 如果值是一个有效的日期对象，则返回true；否则返回false
  */
-export const isDate = (value: unknown): value is Date => {
-  return value instanceof Date && !isNaN(value.getTime());
-};
+export const isDate = (value: unknown): value is Date =>
+  value instanceof Date && !isNaN(value.getTime());
 
 /**
  * 判断给定的值是否为一个Promise对象
@@ -105,13 +96,10 @@ export const isDate = (value: unknown): value is Date => {
  * @param value 任意类型的值，用于判断是否为Promise
  * @returns 如果value是一个Promise对象，则返回true；否则返回false
  */
-export const isPromise = <T>(value: unknown): value is Promise<T> => {
-  return (
-    !!value && // 确保value不是null、undefined或false等虚假值
-    (typeof value === 'object' || typeof value === 'function') && // 判断value是否为对象或函数类型，因为Promise是一个对象
-    typeof (value as Promise<T>).then === 'function' // 检查value是否具有then方法，这是Promise的特征
-  );
-};
+export const isPromise = <T>(value: unknown): value is Promise<T> =>
+  !!value && // 确保value不是null、undefined或false等虚假值
+  (typeof value === 'object' || typeof value === 'function') && // 判断value是否为对象或函数类型，因为Promise是一个对象
+  typeof (value as Promise<T>).then === 'function'; // 检查value是否具有then方法，这是Promise的特征
 
 /**
  * 判断给定的值是否为Error实例
@@ -119,13 +107,11 @@ export const isPromise = <T>(value: unknown): value is Promise<T> => {
  * @param value 任意类型的值，用于判断是否为Error实例
  * @returns 如果value是Error实例，则返回true；否则返回false
  */
-export const isError = (value: unknown): value is Error => {
-  return value instanceof Error;
-};
+export const isError = (value: unknown): value is Error =>
+  value instanceof Error;
 
-export const isSymbol = (value: unknown): value is symbol => {
-  return typeof value === 'symbol';
-};
+export const isSymbol = (value: unknown): value is symbol =>
+  typeof value === 'symbol';
 
 /**
  * 检查给定的值是否为 null 或 undefined
@@ -133,9 +119,23 @@ export const isSymbol = (value: unknown): value is symbol => {
  * @param value 未知类型的值，待检查
  * @returns 如果值为 null 或 undefined，则返回 true，否则返回 false
  */
-export const isNil = (value: unknown): value is null | undefined => {
-  return value === null || value === undefined;
-};
+export const isNil = (value: unknown): value is null | undefined =>
+  value === null || value === undefined;
+
+/**
+ * 价差给定的值是否为基础数据类型.
+ *
+ * 基础数据类型包括 string, number, boolean, null, undefined, or symbol.
+ *
+ * @param value 未知类型的值，待检查.
+ * @returns 如果值为 基础数据类型，则返回 `true` ，否则返回 false
+ */
+export const isPrimitiveType = (value: unknown): boolean =>
+  isString(value) ||
+  isNumber(value) ||
+  isBoolean(value) ||
+  isNil(value) ||
+  isSymbol(value);
 
 /**
  * 检查给定的值是否为 null、undefined 或 NaN
@@ -143,10 +143,8 @@ export const isNil = (value: unknown): value is null | undefined => {
  * @param value 任意类型的值，将被检查是否为 null、undefined 或 NaN
  * @returns 如果值是 null、undefined 或 NaN，则返回 true；否则返回 false
  */
-export const isNilOrNaN = (value: unknown): boolean => {
-  // 使用 isNil 函数检查值是否为 null 或 undefined，或检查值是否为 NaN 的数字
-  return isNil(value) || (typeof value === 'number' && isNaN(value));
-};
+export const isNilOrNaN = (value: unknown): boolean =>
+  isNil(value) || (typeof value === 'number' && isNaN(value));
 
 /**
  * 检查值是否为指定类型或者为null或undefined
@@ -158,10 +156,7 @@ export const isNilOrNaN = (value: unknown): boolean => {
 export const isTypeOrNil = <T>(
   value: unknown,
   typeCheck: (value: unknown) => value is T,
-): value is T | null | undefined => {
-  // 检查值是否为null或undefined，或者是否通过类型检查函数的验证
-  return isNil(value) || typeCheck(value);
-};
+): value is T | null | undefined => isNil(value) || typeCheck(value);
 
 /**
  * 检查给定的值是否为空
