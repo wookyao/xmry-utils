@@ -1,0 +1,48 @@
+{
+  "name": "@xmry/utils",
+  "version": "0.0.1",
+  "description": "javascript utils",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "author": "xu.yao",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wookyao/xmry-utils.git"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "utils"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "build": "tsup",
+    "pub": "node ./scripts/publish.js"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.15.0",
+    "@typescript-eslint/eslint-plugin": "^8.15.0",
+    "@typescript-eslint/parser": "^8.15.0",
+    "eslint": "^9.15.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jsdoc": "^50.5.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-promise": "^7.1.0",
+    "globals": "^15.12.0",
+    "prettier": "^3.3.3",
+    "tslib": "^2.8.1",
+    "tsup": "^8.3.5",
+    "typescript": "^5.6.3",
+    "typescript-eslint": "^8.15.0"
+  }
+}
