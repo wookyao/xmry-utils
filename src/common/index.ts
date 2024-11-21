@@ -1,5 +1,5 @@
 import slice from './slice';
-import copyOf from './copy-of';
+import { copyOf, copyDeepOf } from './copy-of';
 import copyDeep from './copy-deep';
 
-export { slice, copyOf, copyDeep };
+export { slice, copyOf, copyDeepOf, copyDeep };

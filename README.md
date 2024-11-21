@@ -337,6 +337,43 @@ pnpm add @xmry/utils
   ```
 ---
 
+#### **copyDeepOf(value:string | unknown[], size: number,placeholder?: string | unknown | Placeholder\<unknown\>): string | unknown[]**
+> - type Placeholder\<T\> = (index: number) => T;
+> - *创建一个数组或字符串的副本，可以选择性地填充到指定大小*
+> - *对于数组元素为引用类型的值，实现深拷贝*
+> - *@param value 原始字符串或数组*
+> - *@param size 复本的大小。如果小于等于0，返回空数组或空字符串*
+> - *@param placeholder 用于填充的占位符或占位符生成函数。如果未提供，不进行填充*
+
+  ```typescript
+  import { copyDeepOf } from '@xmry/utils';
+
+  const str: string = 'abcdef';
+
+  copyDeepOf(str, 3)  //('abc');
+  copyDeepOf(str, 9, '*')  //('abcdef***');
+
+  copyDeepOf(str, 0)  //('');
+  copyDeepOf(str, 1)  //('a');
+
+  copyDeepOf(str, 1, (i) => i * 2)  //('a');
+  copyDeepOf(str, 9, (i) => i * 2)  //('abcdef121');
+
+
+  const list = [0, 1, 2, 3, 4, 5];
+
+  copyDeepOf(list, 3)  // [0, 1, 2]
+  copyDeepOf(list, 9, 1)  // [0, 1, 2, 3, 4, 5, 1, 1, 1]
+
+  copyDeepOf(list, 0)  // []
+  copyDeepOf(list, 1)  // [0]
+
+  copyDeepOf(list, 1, (i) => i * 2)  // [0]
+  copyDeepOf(list, 9, (i) => i * 2)  // [0, 1, 2, 3, 4, 5, 12, 14, 16]
+
+  ```
+---
+
 
 #### **copyDeep\<T\>(source: T, seen = new WeakMap()): T**
 > - *深拷贝一个对象或数组*
