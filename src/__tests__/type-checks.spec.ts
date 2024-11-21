@@ -14,7 +14,7 @@ import {
   isNull,
   isError,
   isPrimitiveType,
-} from './';
+} from '..';
 
 const numGt5 = (value: unknown) => isNumber(value) && value > 5;
 

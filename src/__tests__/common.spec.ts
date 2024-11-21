@@ -1,4 +1,4 @@
-import { copyOf, slice, copyDeep } from '.';
+import { copyOf, slice, copyDeep } from '..';
 
 // 切片
 describe('slice', () => {
