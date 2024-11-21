@@ -298,3 +298,41 @@ pnpm add @xmry/utils
   slice(arr, '4::-2') // [10, 8, 6, 4]
 
   ```
+---
+
+#### **copyOf(value:string | unknown[], size: number,placeholder?: string | unknown | Placeholder\<unknown\>): string | unknown[]**
+> - type Placeholder\<T\> = (index: number) => T;
+> - *创建一个数组或字符串的副本，可以选择性地填充到指定大小*
+> - *对于数组元素为引用类型的值，实现浅拷贝*
+> - *@param value 原始字符串或数组*
+> - *@param size 复本的大小。如果小于等于0，返回空数组或空字符串*
+> - *@param placeholder 用于填充的占位符或占位符生成函数。如果未提供，不进行填充*
+
+  ```typescript
+  import { copyOf } from '@xmry/utils';
+
+  const str: string = 'abcdef';
+
+  copyOf(str, 3)  //('abc');
+  copyOf(str, 9, '*')  //('abcdef***');
+
+  copyOf(str, 0)  //('');
+  copyOf(str, 1)  //('a');
+
+  copyOf(str, 1, (i) => i * 2)  //('a');
+  copyOf(str, 9, (i) => i * 2)  //('abcdef121');
+
+
+  const list = [0, 1, 2, 3, 4, 5];
+
+  copyOf(list, 3)  // [0, 1, 2]
+  copyOf(list, 9, 1)  // [0, 1, 2, 3, 4, 5, 1, 1, 1]
+
+  copyOf(list, 0)  // []
+  copyOf(list, 1)  // [0]
+
+  copyOf(list, 1, (i) => i * 2)  // [0]
+  copyOf(list, 9, (i) => i * 2)  // [0, 1, 2, 3, 4, 5, 12, 14, 16]
+
+  ```
+---
