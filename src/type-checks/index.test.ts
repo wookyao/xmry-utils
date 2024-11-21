@@ -10,7 +10,131 @@ import {
   isEmpty,
   isDate,
   isPromise,
+  isUndefined,
+  isNull,
+  isError,
+  isPrimitiveType,
 } from './';
+
+const numGt5 = (value: unknown) => isNumber(value) && value > 5;
+
+// isString
+describe('isString', () => {
+  test('isString check', () => {
+    expect(isString('')).toBe(true);
+    expect(isString(1)).toBe(false);
+    expect(isString(null)).toBe(false);
+  });
+});
+
+// isNumber
+describe('isNumber', () => {
+  test('isNumber check', () => {
+    expect(isNumber('')).toBe(false);
+    expect(isNumber(1)).toBe(true);
+    expect(isNumber(Number('sd'))).toBe(false);
+  });
+});
+
+// isBoolean
+describe('isBoolean', () => {
+  test('isBoolean check', () => {
+    expect(isBoolean('')).toBe(false);
+    expect(isBoolean(1 === 1)).toBe(true);
+    expect(isBoolean('true')).toBe(false);
+  });
+});
+
+// isObject
+describe('isObject', () => {
+  test('isObject check', () => {
+    expect(isObject('')).toBe(false);
+    expect(isObject({})).toBe(true);
+    expect(isObject([])).toBe(false);
+    expect(isObject(null)).toBe(false);
+    expect(isObject(undefined)).toBe(false);
+  });
+});
+
+// isArray
+describe('isArray', () => {
+  test('isArray check', () => {
+    expect(isArray('')).toBe(false);
+    expect(isArray({})).toBe(false);
+    expect(isArray([])).toBe(true);
+    expect(isArray(null)).toBe(false);
+    expect(isArray(undefined)).toBe(false);
+    expect(isArray(Array())).toBe(true);
+  });
+});
+
+// isFunction
+describe('isFunction', () => {
+  test('isFunction check', () => {
+    expect(isFunction(function () {})).toBe(true);
+    expect(isFunction(() => {})).toBe(true);
+    expect(isFunction('() => {}')).toBe(false);
+    expect(isFunction(null)).toBe(false);
+    expect(isFunction(undefined)).toBe(false);
+    expect(isFunction({})).toBe(false);
+  });
+});
+
+// isUndefined
+describe('isUndefined', () => {
+  test('isUndefined check', () => {
+    expect(isUndefined(undefined)).toBe(true);
+    expect(isUndefined(null)).toBe(false);
+    expect(isUndefined('undefined')).toBe(false);
+    expect(isUndefined('null')).toBe(false);
+    expect(isUndefined('')).toBe(false);
+    expect(isUndefined(0)).toBe(false);
+    expect(isUndefined(false)).toBe(false);
+  });
+});
+
+// isNull
+describe('isNull', () => {
+  test('isNull check', () => {
+    expect(isNull(undefined)).toBe(false);
+    expect(isNull(null)).toBe(true);
+    expect(isNull('undefined')).toBe(false);
+    expect(isNull('null')).toBe(false);
+    expect(isNull('')).toBe(false);
+    expect(isNull(0)).toBe(false);
+    expect(isNull(false)).toBe(false);
+  });
+});
+
+// isDate
+describe('isDate', () => {
+  test('isDate check', () => {
+    expect(isDate(new Date())).toBe(true);
+    expect(isDate(new Date('  '))).toBe(false);
+    expect(isDate('')).toBe(false);
+    expect(isDate('2024-10-10')).toBe(false);
+    expect(isDate(new Date('2024-10-10'))).toBe(true);
+  });
+});
+
+// isPromise
+describe('isPromise', () => {
+  test('isPromise check', () => {
+    expect(isPromise(new Promise(() => {}))).toBe(true);
+    expect(isPromise(Promise.resolve())).toBe(true);
+    expect(isPromise('')).toBe(false);
+    expect(isPromise(new Date('2024-10-10'))).toBe(false);
+  });
+});
+
+// isError
+describe('isError', () => {
+  test('isError check', () => {
+    expect(isError(new Error())).toBe(true);
+    expect(isError(new TypeError())).toBe(true);
+    expect(isError('new TypeError()')).toBe(false);
+  });
+});
 
 // isNil
 describe('isNil', () => {
@@ -27,6 +151,21 @@ describe('isNil', () => {
     expect(isNil('')).toBe(false);
     expect(isNil(false)).toBe(false);
     expect(isNil([])).toBe(false);
+  });
+});
+
+// isPrimitiveType
+describe('isPrimitiveType', () => {
+  test('isPrimitiveType check', () => {
+    expect(isPrimitiveType('')).toBe(true);
+    expect(isPrimitiveType(0)).toBe(true);
+    expect(isPrimitiveType(false)).toBe(true);
+    expect(isPrimitiveType(undefined)).toBe(true);
+    expect(isPrimitiveType(null)).toBe(true);
+    expect(isPrimitiveType(Symbol(''))).toBe(true);
+
+    expect(isPrimitiveType(function () {})).toBe(false);
+    expect(isPrimitiveType({})).toBe(false);
   });
 });
 
@@ -77,6 +216,11 @@ describe('isTypeOrNil', () => {
   it('isPromise check', () => {
     expect(isTypeOrNil({}, isDate)).toBe(false);
     expect(isTypeOrNil(new Promise(() => {}), isPromise)).toBe(true);
+  });
+
+  it('isPromise customer function check', () => {
+    expect(isTypeOrNil(6, numGt5)).toBe(true);
+    expect(isTypeOrNil(1, numGt5)).toBe(false);
   });
 });
 

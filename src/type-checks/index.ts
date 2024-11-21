@@ -123,7 +123,7 @@ export const isNil = (value: unknown): value is null | undefined =>
   value === null || value === undefined;
 
 /**
- * 价差给定的值是否为基础数据类型.
+ * 判定给定的值是否为基础数据类型.
  *
  * 基础数据类型包括 string, number, boolean, null, undefined, or symbol.
  *
@@ -155,7 +155,7 @@ export const isNilOrNaN = (value: unknown): boolean =>
  */
 export const isTypeOrNil = <T>(
   value: unknown,
-  typeCheck: (value: unknown) => value is T,
+  typeCheck: (value: unknown) => boolean,
 ): value is T | null | undefined => isNil(value) || typeCheck(value);
 
 /**
