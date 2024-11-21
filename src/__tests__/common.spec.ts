@@ -1,4 +1,4 @@
-import { copyOf, slice, copyDeep } from '..';
+import { copyOf, slice, copyDeep, serialize, equal } from '..';
 
 // 切片
 describe('slice', () => {
@@ -155,5 +155,76 @@ describe('copyDeep', () => {
     expect(copied).toEqual(regex);
     expect(copied).not.toBe(regex); // 引用不同
     expect(copied.flags).toBe(regex.flags);
+  });
+});
+
+// equal
+describe('equal', () => {
+  test('should compare primitive values', () => {
+    expect(equal(42, 42)).toBe(true);
+    expect(equal('hello', 'hello')).toBe(true);
+    expect(equal(null, null)).toBe(true);
+    expect(equal(undefined, undefined)).toBe(true);
+
+    const obj = { a: 1, b: { c: 2 } };
+    expect(equal(obj, obj)).toBe(true);
+    expect(equal(obj, { a: 1, b: { c: 2 } })).toBe(true);
+    expect(equal(obj, { a: 1, b: { c: 3 } })).toBe(false);
+
+    const list = [0, 2, 3];
+    expect(equal(list, list)).toBe(true);
+    expect(equal(list, [0, 2, 3])).toBe(true);
+    expect(equal(list, [0, 3, 2])).toBe(false);
+    expect(equal(list, [0, 2, 4])).toBe(false);
+  });
+});
+
+// 自定义序列化
+describe('serialize', () => {
+  test('serialize string', () => {
+    expect(serialize('hello')).toBe('s(hello)');
+
+    const fn = () => {};
+
+    function fn2() {}
+
+    const obj = {
+      a: 'hello',
+      b: 123,
+      b1: 0,
+      b2: -0,
+      c: true,
+      d: false,
+      e: null,
+      f: undefined,
+      g: () => {
+        const a = 1;
+        return a * 20;
+      },
+      gfn: fn,
+      fn2,
+      g2: function () {
+        const a = 1;
+        return a * 20;
+      },
+      h: new Date('2020-01-01'),
+      i: /abc/gi,
+      j: Symbol('test'),
+      k: new Set([1, 2, 3]),
+      l: new Map([
+        ['a', 1],
+        ['b', 2],
+      ]),
+      m: { n: 'nested' },
+      n: [4, 5, 6],
+      o: NaN,
+      p: Infinity,
+      q: -Infinity,
+      r: BigInt(12345678901234567890),
+    };
+
+    expect(serialize(obj)).toBe(
+      '{a:s(hello),b:#(123),b1:#(0),b2:-0,c:b(T),d:b(F),e:Nil.,f:Und.,fn2:f([code native]),g:lam([code native]),g2:f([code native]),gfn:lam([code native]),h:d(2020-01-01T00:00:00.000Z),i:r(/abc/gi),j:s(Symbol(test)),k:S{#(1),#(2),#(3)},l:M{s(a):#(1),s(b):#(2)},m:{n:s(nested)},n:[#(4),#(5),#(6)],o:NaN,p:#(Infinity),q:#(-Infinity),r:###(12345678901234567168)}',
+    );
   });
 });
