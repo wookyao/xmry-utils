@@ -23,6 +23,15 @@ export const isNumber = (value: unknown): value is number =>
   typeof value === 'number' && !isNaN(value);
 
 /**
+ * 判断给定的值是否为bigint类型
+ *
+ * @param value 任意类型的值，用于判断
+ * @returns 如果值是bigint类型，则返回true；否则返回false
+ */
+export const isBigInt = (value: unknown): value is bigint =>
+  typeof value === 'bigint';
+
+/**
  * 判断给定的值是否为布尔类型
  *
  * @param value 任意类型的值，用于判断
@@ -125,14 +134,17 @@ export const isNil = (value: unknown): value is null | undefined =>
 /**
  * 判定给定的值是否为基础数据类型.
  *
- * 基础数据类型包括 string, number, boolean, null, undefined, or symbol.
+ * 基础数据类型包括 string, number, bigInt, boolean, null, undefined, or symbol.
  *
  * @param value 未知类型的值，待检查.
  * @returns 如果值为 基础数据类型，则返回 `true` ，否则返回 false
  */
-export const isPrimitiveType = (value: unknown): boolean =>
+export const isPrimitiveType = (
+  value: unknown,
+): value is string | number | bigint | boolean | null | undefined | symbol =>
   isString(value) ||
   isNumber(value) ||
+  isBigInt(value) ||
   isBoolean(value) ||
   isNil(value) ||
   isSymbol(value);

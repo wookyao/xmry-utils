@@ -336,3 +336,62 @@ pnpm add @xmry/utils
 
   ```
 ---
+
+
+#### **copyDeep\<T\>(source: T, seen = new WeakMap()): T**
+> - *深拷贝一个对象或数组*
+> - *@param source 要拷贝的源对象或数组*
+> - *@param seen 用于处理循环引用的对象弱引用映射，默认为新的 WeakMap*
+> - *@returns 返回深拷贝后的对象或数组*
+
+  ```typescript
+  import { copyDeep } from '@xmry/utils';
+
+  const arr = [1, 2, { a: 3 }];
+  const copied = copyDeep(arr);
+
+  // 数组
+  expect(copied).toEqual(arr); // 值相同 
+  expect(copied).not.toBe(arr); // 引用不同 
+  expect(copied[2]).not.toBe(arr[2]); // 深拷贝内部对象 
+
+  // 对象
+  const obj = { a: 1, b: { c: 2 } };
+  const copied = copyDeep(obj);
+  expect(copied).toEqual(obj); // 值相同 
+  expect(copied).not.toBe(obj); // 引用不同 
+  expect(copied.b).not.toBe(obj.b); // 深拷贝内部对象
+
+  // Set
+  const set = new Set([1, 2, 3]);
+  const copied = copyDeep(set);
+  expect(copied).toEqual(set);
+  expect(copied).not.toBe(set); // 引用不同
+
+  // Map 
+  const map = new Map();
+  map.set('a', 1);
+  map.set('b', { c: 2 });
+
+  // 正则
+  const regex = /test/gi;
+  const copied = copyDeep(regex);
+  expect(copied).toEqual(regex);
+  expect(copied).not.toBe(regex); // 引用不同
+  expect(copied.flags).toBe(regex.flags);
+
+  const copied = copyDeep(map);
+  expect(copied).toEqual(map);
+  expect(copied).not.toBe(map); // 引用不同
+  expect(copied.get('b')).not.toBe(map.get('b')); // 深拷贝内部对象
+
+  // 循环引用
+  const obj: any = { a: 1 };
+  obj.self = obj; // 创建循环引用
+  const copied = copyDeep(obj);
+  expect(copied).toEqual({ a: 1, self: copied }); // 确保引用指向复制后的对象
+  expect(copied.self).toBe(copied); // 循环引用保持正确
+  
+
+  ```
+---
