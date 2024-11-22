@@ -40,19 +40,24 @@ pnpm add @xmry/utils
     - [isNilOrNaN()](#isNilOrNaN)
     - [isTypeOrNil()](#isTypeOrNil)
     - [isEmpty()](#isEmpty)
+
 - [common 通用模块](#common)
     - [slice()](#slice)
     - [copyOf()](#copyOf)
     - [copyDeepOf()](#copyDeepOf)
     - [copyDeep()](#copyDeep)
-    - [equal()](#equal)
     - [serialize()](#serialize)
     - [equal()](#equal)
     - [hex2Rgba()](#hex2Rgba)
+
 - [number 模块](#number)
     - [limitNumber()](#limitNumber)
     - [rand()](#rand)
     - [toThousands()](#toThousands)
+
+- [functions 模块](#number)
+    - [debounce() 防抖]
+    - [throttle() 节流]
     
 
 ## 3.  用法

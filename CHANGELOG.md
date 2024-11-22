@@ -3,6 +3,7 @@
 ## 0.0.5
 * Add Function method `debounce` `throttle`
 * Add `hex2Rgba` method
+* Add `limitNumber` `rand` `toThousands` method
 
 ## 0.0.4
 * Add `sliceLoad` method
