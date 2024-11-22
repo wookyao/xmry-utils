@@ -1,7 +1,7 @@
 # CHANGE LOGS
 
 ## 0.0.5
-* Add Function method `debounce` `throttle`
+* Add Function method `debounce` `throttle` `curry`
 * Add `hex2Rgba` method
 * Add `limitNumber` `rand` `toThousands` method
 

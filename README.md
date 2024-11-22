@@ -58,6 +58,7 @@ pnpm add @xmry/utils
 - [functions 模块](#number)
     - [debounce() 防抖]
     - [throttle() 节流]
+    - [curry() 柯里化]
     
 
 ## 3.  用法

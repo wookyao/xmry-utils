@@ -1,4 +1,6 @@
 import { debounce } from './debounce';
 import { throttle } from './throttle';
 
-export { debounce, throttle };
+import { curry } from './curry';
+
+export { debounce, throttle, curry };
