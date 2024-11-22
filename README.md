@@ -89,7 +89,7 @@ pnpm add @xmry/utils
   ```
 ---
 
-<p id="isNumber"></p>
+<p id="isBoolean"></p>
 
 #### **isBoolean(value: unknown): value is boolean**
 > *检查给定的值是否为布尔类型*
@@ -104,7 +104,7 @@ pnpm add @xmry/utils
   ```
 ---
 
-<p id="isNumber"></p>
+<p id="isObject"></p>
 
 #### **isObject(value: unknown): value is object**
 > *检查给定的值是否为对象类型*
@@ -120,7 +120,7 @@ pnpm add @xmry/utils
   ```
 ---
 
-<p id="isNumber"></p>
+<p id="isArray"></p>
 
 #### **isArray(value: unknown): boolean**
 > *判断给定的值是否为数组 和 Array.isArray()方法表现一致*
@@ -136,7 +136,7 @@ pnpm add @xmry/utils
   ```
 ---
 
-<p id="isNumber"></p>
+<p id="isFunction"></p>
 
 #### **isFunction(value: unknown): value is Function**
 > *判断给定的值是否为函数*
@@ -152,7 +152,7 @@ pnpm add @xmry/utils
   ```
 ---
 
-<p id="isNumber"></p>
+<p id="isUndefined"></p>
 
 #### **isUndefined(value: unknown): value is undefined**
 > *检查给定的值是否为 `undefined`*
@@ -167,7 +167,7 @@ pnpm add @xmry/utils
   ```
 ---
 
-<p id="isNumber"></p>
+<p id="isNull"></p>
 
 #### **isNull(value: unknown): value is null**
 > *检查给定的值是否为 null*
@@ -182,7 +182,7 @@ pnpm add @xmry/utils
   ```
 ---
 
-<p id="isNumber"></p>
+<p id="isDate"></p>
 
 #### **isDate(value: unknown): value is Date**
 > *检查给定的值是否为一个有效的日期对象*
@@ -196,7 +196,7 @@ pnpm add @xmry/utils
   ```
 ---
 
-<p id="isNumber"></p>
+<p id="isPromise"></p>
 
 #### **isPromise(value: unknown): boolean**
 > *判断给定的值是否为一个Promise对象*
@@ -211,7 +211,7 @@ pnpm add @xmry/utils
   ```
 ---
 
-<p id="isNumber"></p>
+<p id="isError"></p>
 
 #### **isError(value: unknown): value is Error**
 > *判断给定的值是否为Error实例*
@@ -225,7 +225,7 @@ pnpm add @xmry/utils
   ```
 ---
 
-<p id="isNumber"></p>
+<p id="isNil"></p>
 
 #### **isNil(value: unknown): value is null | undefined**
 > *检查给定的值是否为 null 或 undefined*
@@ -239,7 +239,7 @@ pnpm add @xmry/utils
   ```
 ---
 
-<p id="isNumber"></p>
+<p id="isPrimitiveType"></p>
 
 #### **isPrimitiveType(value: unknown): boolean**
 > *判定给定的值是否为基础数据类型*
@@ -261,7 +261,7 @@ pnpm add @xmry/utils
   ```
 ---
 
-<p id="isNumber"></p>
+<p id="isNilOrNaN"></p>
 
 #### **isNilOrNaN(value: unknown): boolean**
 > *检查给定的值是否为 null、undefined 或 NaN*
@@ -278,7 +278,7 @@ pnpm add @xmry/utils
   ```
 ---
 
-<p id="isNumber"></p>
+<p id="isTypeOrNil"></p>
 
 #### **isTypeOrNil(value: unknown, typeCheck: (value: unknown) => boolean): boolean**
 > - *检查值是否为指定类型或者为null或undefined*
@@ -307,7 +307,7 @@ pnpm add @xmry/utils
   ```
 ---
 
-<p id="isNumber"></p>
+<p id="isEmpty"></p>
 
 #### **isEmpty(value: unknown, typeCheck: (value: unknown) => boolean): boolean**
 > - *检查给定的值是否为空*
