@@ -3,6 +3,7 @@ import { limitNumber } from '../numbers';
 
 /** hex2Rgba
  * 将十六进制颜色转换为RGBA颜色
+ *
  * @param hex 十六进制颜色字符串
  * @param alpha 透明度值，可选，默认为1
  * @returns 返回RGBA颜色字符串

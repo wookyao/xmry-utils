@@ -1,6 +1,6 @@
 # @xmry/utils
 
-## 安装
+## 1. 安装
 
 use npm
 
@@ -18,11 +18,50 @@ use pnpm
 
 ```bash
 pnpm add @xmry/utils
+
 ```
 
-## 用法
 
-### 🚀 type-checks 类型检查模块
+## 2. 函数目录
+- [type-checks 类型检查](#type-checks)
+    - [isString()](#isString)
+    - [isNumber()](#isNumber)
+    - [isBoolean()](#isBoolean)
+    - [isObject()](#isObject)
+    - [isArray()](#isArray)
+    - [isFunction()](#isFunction)
+    - [isUndefined()](#isUndefined)
+    - [isNull()](#isNumber)
+    - [isDate()](#isDate)
+    - [isPromise()](#isPromise)
+    - [isError()](#isError)
+    - [isNil()](#isNil)
+    - [isPrimitiveType()](#isPrimitiveType)
+    - [isNilOrNaN()](#isNilOrNaN)
+    - [isTypeOrNil()](#isTypeOrNil)
+    - [isEmpty()](#isEmpty)
+- [common 通用模块](#common)
+    - [slice()](#slice)
+    - [copyOf()](#copyOf)
+    - [copyDeepOf()](#copyDeepOf)
+    - [copyDeep()](#copyDeep)
+    - [equal()](#equal)
+    - [serialize()](#serialize)
+    - [equal()](#equal)
+    - [hex2Rgba()](#hex2Rgba)
+- [number 模块](#number)
+    - [limitNumber()](#limitNumber)
+    - [rand()](#rand)
+    - [toThousands()](#toThousands)
+    
+
+## 3.  用法
+
+<p id="type-checks"></p>
+
+### 🚀 type-checks 类型检查
+
+<p id="isString"></p>
 
 #### **isString(value: unknown): value is string**
 > *判断给定的值是否为字符串类型*
@@ -36,6 +75,8 @@ pnpm add @xmry/utils
   ```
 ---
 
+<p id="isNumber"></p>
+
 #### **isNumber(value: unknown): value is number**
 > *检查给定的值是否为数字*
 
@@ -47,6 +88,8 @@ pnpm add @xmry/utils
   isNumber(null); // false
   ```
 ---
+
+<p id="isNumber"></p>
 
 #### **isBoolean(value: unknown): value is boolean**
 > *检查给定的值是否为布尔类型*
@@ -60,6 +103,8 @@ pnpm add @xmry/utils
   isBoolean('true'); // false
   ```
 ---
+
+<p id="isNumber"></p>
 
 #### **isObject(value: unknown): value is object**
 > *检查给定的值是否为对象类型*
@@ -75,6 +120,8 @@ pnpm add @xmry/utils
   ```
 ---
 
+<p id="isNumber"></p>
+
 #### **isArray(value: unknown): boolean**
 > *判断给定的值是否为数组 和 Array.isArray()方法表现一致*
 
@@ -88,6 +135,8 @@ pnpm add @xmry/utils
   isArray(null); // false
   ```
 ---
+
+<p id="isNumber"></p>
 
 #### **isFunction(value: unknown): value is Function**
 > *判断给定的值是否为函数*
@@ -103,6 +152,8 @@ pnpm add @xmry/utils
   ```
 ---
 
+<p id="isNumber"></p>
+
 #### **isUndefined(value: unknown): value is undefined**
 > *检查给定的值是否为 `undefined`*
 
@@ -115,6 +166,8 @@ pnpm add @xmry/utils
   isUndefined(0); // false
   ```
 ---
+
+<p id="isNumber"></p>
 
 #### **isNull(value: unknown): value is null**
 > *检查给定的值是否为 null*
@@ -129,6 +182,8 @@ pnpm add @xmry/utils
   ```
 ---
 
+<p id="isNumber"></p>
+
 #### **isDate(value: unknown): value is Date**
 > *检查给定的值是否为一个有效的日期对象*
 
@@ -140,6 +195,8 @@ pnpm add @xmry/utils
   isDate(new Date('  ')); // false
   ```
 ---
+
+<p id="isNumber"></p>
 
 #### **isPromise(value: unknown): boolean**
 > *判断给定的值是否为一个Promise对象*
@@ -154,6 +211,8 @@ pnpm add @xmry/utils
   ```
 ---
 
+<p id="isNumber"></p>
+
 #### **isError(value: unknown): value is Error**
 > *判断给定的值是否为Error实例*
 
@@ -166,6 +225,8 @@ pnpm add @xmry/utils
   ```
 ---
 
+<p id="isNumber"></p>
+
 #### **isNil(value: unknown): value is null | undefined**
 > *检查给定的值是否为 null 或 undefined*
 
@@ -177,6 +238,8 @@ pnpm add @xmry/utils
   isNil(0); // false
   ```
 ---
+
+<p id="isNumber"></p>
 
 #### **isPrimitiveType(value: unknown): boolean**
 > *判定给定的值是否为基础数据类型*
@@ -198,6 +261,8 @@ pnpm add @xmry/utils
   ```
 ---
 
+<p id="isNumber"></p>
+
 #### **isNilOrNaN(value: unknown): boolean**
 > *检查给定的值是否为 null、undefined 或 NaN*
 
@@ -212,6 +277,8 @@ pnpm add @xmry/utils
   isNilOrNaN('123'); // false
   ```
 ---
+
+<p id="isNumber"></p>
 
 #### **isTypeOrNil(value: unknown, typeCheck: (value: unknown) => boolean): boolean**
 > - *检查值是否为指定类型或者为null或undefined*
@@ -239,6 +306,8 @@ pnpm add @xmry/utils
 
   ```
 ---
+
+<p id="isNumber"></p>
 
 #### **isEmpty(value: unknown, typeCheck: (value: unknown) => boolean): boolean**
 > - *检查给定的值是否为空*
@@ -268,7 +337,11 @@ pnpm add @xmry/utils
 ---
 
 
+<p id='common'></p>
+
 ### 🚀 common 通用模块
+
+<p id="slice"></p>
 
 #### **slice(value:string | unknown[], rule:string): string | unknown[]**
 > - *一个自定义的切片函数，它能够按照指定规则处理字符串或数组*
@@ -299,6 +372,8 @@ pnpm add @xmry/utils
 
   ```
 ---
+
+<p id="copyOf"></p>
 
 #### **copyOf(value:string | unknown[], size: number,placeholder?: string | unknown | Placeholder\<unknown\>): string | unknown[]**
 > - type Placeholder\<T\> = (index: number) => T;
@@ -337,6 +412,8 @@ pnpm add @xmry/utils
   ```
 ---
 
+<p id="copyDeepOf"></p>
+
 #### **copyDeepOf(value:string | unknown[], size: number,placeholder?: string | unknown | Placeholder\<unknown\>): string | unknown[]**
 > - type Placeholder\<T\> = (index: number) => T;
 > - *创建一个数组或字符串的副本，可以选择性地填充到指定大小*
@@ -374,6 +451,8 @@ pnpm add @xmry/utils
   ```
 ---
 
+
+<p id="copyDeep"></p>
 
 #### **copyDeep\<T\>(source: T, seen = new WeakMap()): T**
 > - *深拷贝一个对象或数组*
@@ -434,6 +513,8 @@ pnpm add @xmry/utils
 ---
 
 
+<p id="equal"></p>
+
 #### **equal(a: any, b: any): boolean**
 > - *深度比较两个对象是否相等*
 
@@ -460,6 +541,8 @@ pnpm add @xmry/utils
 
   ```
 ---
+
+<p id="serialize"></p>
 
 #### **serialize(target: any, seen: WeakMap<object, string>): string**
 > - *深度比较两个对象是否相等*
@@ -510,6 +593,79 @@ pnpm add @xmry/utils
 
     // 序列化结果
     // '{a:s(hello),b:#(123),b1:#(0),b2:-0,c:b(T),d:b(F),e:Nil.,f:Und.,fn2:f([code native]),g:lam([code native]),g2:f([code native]),gfn:lam([code native]),h:d(2020-01-01T00:00:00.000Z),i:r(/abc/gi),j:s(Symbol(test)),k:S{#(1),#(2),#(3)},l:M{s(a):#(1),s(b):#(2)},m:{n:s(nested)},n:[#(4),#(5),#(6)],o:NaN,p:#(Infinity),q:#(-Infinity),r:###(12345678901234567168)}'
+
+  ```
+---
+
+
+
+
+<p id="hex2Rgba"></p>
+
+#### **hex2Rgba(hex: string, alpha?: number): string**
+> - *将十六进制颜色转换为RGBA颜色*
+
+  ```typescript
+  import { hex2Rgba } from '@xmry/utils';
+
+  hex2Rgba('#f00') // rgba(255,0,0,1)
+  hex2Rgba('#f00', 0.5) // rgba(255,0,0,0.5)
+
+  ```
+---
+
+<p id="number"></p>
+
+### 🚀 Number 
+
+<p id="limitNumber"></p>
+
+#### **limitNumber(value: number, max: number, min: number): number**
+> - *将给定的数值限制在指定的最小值和最大值范围内*
+
+  ```typescript
+  import { limitNumber } from '@xmry/utils';
+
+  limitNumber(7, 10, 5)  // 7
+  limitNumber(7, 6, 3)  // 6
+  limitNumber(1, 10, 5)  // 5
+  limitNumber(-7, 10, 5)  // 5
+  limitNumber(10, 10, 5)  // 10
+
+  ```
+---
+
+<p id="rand"></p>
+
+#### **rand(value: number, max: number, min: number): number**
+> - *将给定的数值限制在指定的最小值和最大值范围内*
+
+  ```typescript
+  import { rand } from '@xmry/utils';
+
+  const min = 1;
+  const max = 10;
+  const result = rand(max, min);
+
+  // 1 <= result <= 10
+
+  ```
+---
+
+<p id="toThousands"></p>
+
+#### **toThousands(value: number, max: number, min: number): number**
+> - *将给定的数值限制在指定的最小值和最大值范围内*
+
+  ```typescript
+  import { toThousands } from '@xmry/utils';
+
+  toThousands(1000)  //'1,000
+  toThousands(1000000)  //'1,000,000
+  toThousands(1000000000)  //'1,000,000,000
+  toThousands(1000.123)  //'1,000.123
+  toThousands(1000.1)  //'1,000.1
+  toThousands(1000.0)  //'1,000
 
   ```
 ---
