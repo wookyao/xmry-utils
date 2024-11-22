@@ -644,7 +644,7 @@ pnpm add @xmry/utils
 <p id="rand"></p>
 
 #### **rand(value: number, max: number, min: number): number**
-> - *将给定的数值限制在指定的最小值和最大值范围内*
+> - *生成指定范围内的随机整数*
 
   ```typescript
   import { rand } from '@xmry/utils';
@@ -661,7 +661,7 @@ pnpm add @xmry/utils
 <p id="toThousands"></p>
 
 #### **toThousands(value: number, max: number, min: number): number**
-> - *将给定的数值限制在指定的最小值和最大值范围内*
+> - *将数字转换为带有千位分隔符的字符串*
 
   ```typescript
   import { toThousands } from '@xmry/utils';
