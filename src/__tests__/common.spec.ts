@@ -1,4 +1,4 @@
-import { copyOf, slice, copyDeep, serialize, equal } from '..';
+import { copyOf, slice, copyDeep, serialize, equal, hex2Rgba } from '..';
 
 // 切片
 describe('slice', () => {
@@ -226,5 +226,13 @@ describe('serialize', () => {
     expect(serialize(obj)).toBe(
       '{a:s(hello),b:#(123),b1:#(0),b2:-0,c:b(T),d:b(F),e:Nil.,f:Und.,fn2:f([code native]),g:lam([code native]),g2:f([code native]),gfn:lam([code native]),h:d(2020-01-01T00:00:00.000Z),i:r(/abc/gi),j:s(Symbol(test)),k:S{#(1),#(2),#(3)},l:M{s(a):#(1),s(b):#(2)},m:{n:s(nested)},n:[#(4),#(5),#(6)],o:NaN,p:#(Infinity),q:#(-Infinity),r:###(12345678901234567168)}',
     );
+  });
+});
+
+// hex2rgba
+describe('hex2Rgba', () => {
+  test('hex2Rgba', () => {
+    expect(hex2Rgba('#f00')).toBe('rgba(255,0,0,1)');
+    expect(hex2Rgba('#f00', 0.5)).toBe('rgba(255,0,0,0.5)');
   });
 });

@@ -1,6 +1,6 @@
 import { isDate } from '../type-checks';
 
-/**
+/** serialize
  * 将对象序列化为自定义字符串格式
  *
  * 该函数用于将各种类型的对象转换为字符串表示形式，以便于存储或传输
@@ -11,10 +11,10 @@ import { isDate } from '../type-checks';
  * @param seen 用于跟踪已访问对象的WeakMap，以处理循环引用，默认为新的WeakMap
  * @returns 序列化后的字符串
  */
-function serialize(
+const serialize = (
   target: any,
   seen: WeakMap<object, string> = new WeakMap(),
-): string {
+): string => {
   let size: number = 0;
 
   function _serialize(value: any): string {
@@ -104,9 +104,8 @@ function serialize(
   }
 
   const ser = _serialize(target);
-  console.log('🚀 ~ ser=>', ser);
 
   return ser;
-}
+};
 
 export { serialize };

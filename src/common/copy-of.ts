@@ -4,7 +4,7 @@ import slice from './slice';
 
 type Placeholder<T> = (index: number) => T;
 
-// copyOf 函数重载
+// start 函数重载 copyOf
 function copyOf(
   value: string,
   size: number,
@@ -30,8 +30,9 @@ function copyOf(
   size: number,
   placeholder?: string | unknown | Placeholder<unknown>,
 ): string | unknown[];
+// end 函数重载
 
-/**
+/** copyOf
  * 创建一个数组或字符串的副本，可以选择性地填充到指定大小。
  *
  * 对于数组元素为引用类型的值，实现浅拷贝
@@ -82,7 +83,7 @@ function copyOf(
   }
 }
 
-// copyDeepOf 函数重载
+// start 函数重载 copyDeepOf
 function copyDeepOf(
   value: string,
   size: number,
@@ -108,8 +109,9 @@ function copyDeepOf(
   size: number,
   placeholder?: string | unknown | Placeholder<unknown>,
 ): string | unknown[];
+// end 函数重载
 
-/**
+/** copyDeepOf
  * 创建一个数组或字符串的副本，可以选择性地填充到指定大小。
  *
  * 对于数组元素为引用类型的值，实现深拷贝

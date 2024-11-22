@@ -4,5 +4,15 @@ import copyDeep from './copy-deep';
 import { sliceLoad } from './slice-load';
 import { equal } from './equal';
 import { serialize } from './serialize';
+import hex2Rgba from './hex2rgba';
 
-export { slice, copyOf, copyDeepOf, copyDeep, equal, sliceLoad, serialize };
+export {
+  slice,
+  copyOf,
+  copyDeepOf,
+  copyDeep,
+  equal,
+  sliceLoad,
+  serialize,
+  hex2Rgba,
+};

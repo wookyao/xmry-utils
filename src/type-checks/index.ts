@@ -1,6 +1,4 @@
-// file: type-checks.ts
-
-/**
+/** isString
  * 判断给定的值是否为字符串类型
  *
  * @param value 任意类型的值，用于判断
@@ -9,7 +7,7 @@
 export const isString = (value: unknown): value is string =>
   typeof value === 'string';
 
-/**
+/** isNumber
  * 检查给定的值是否为数字。
  *
  * 该函数用于确定提供的值是否为一个有效的数字类型。它不仅检查值的类型是否为'number'，
@@ -22,7 +20,7 @@ export const isString = (value: unknown): value is string =>
 export const isNumber = (value: unknown): value is number =>
   typeof value === 'number' && !isNaN(value);
 
-/**
+/** isBigInt
  * 判断给定的值是否为bigint类型
  *
  * @param value 任意类型的值，用于判断
@@ -31,7 +29,7 @@ export const isNumber = (value: unknown): value is number =>
 export const isBigInt = (value: unknown): value is bigint =>
   typeof value === 'bigint';
 
-/**
+/** isBoolean
  * 判断给定的值是否为布尔类型
  *
  * @param value 任意类型的值，用于判断
@@ -40,7 +38,7 @@ export const isBigInt = (value: unknown): value is bigint =>
 export const isBoolean = (value: unknown): value is boolean =>
   typeof value === 'boolean';
 
-/**
+/** isObject
  * 判断给定值是否为非空且非数组的对象
  *
  * 此函数用于精确区分对象类型与其它类型，包括null和数组虽然在JavaScript中被视为对象，
@@ -52,7 +50,7 @@ export const isBoolean = (value: unknown): value is boolean =>
 export const isObject = (value: unknown): value is object =>
   typeof value === 'object' && value !== null && !Array.isArray(value);
 
-/**
+/** isArray
  * 判断给定的值是否为数组
  *
  * @template T 数组元素的类型
@@ -62,7 +60,7 @@ export const isObject = (value: unknown): value is object =>
 export const isArray = <T>(value: unknown): value is T[] =>
   Array.isArray(value);
 
-/**
+/** isFunction
  * 判断给定的值是否为函数
  *
  * @param value 任意类型的值，用于判断是否为函数
@@ -72,7 +70,7 @@ export const isFunction = (value: unknown): value is Function =>
   typeof value === 'function' &&
   Object.prototype.toString.call(value) === '[object Function]';
 
-/**
+/** isUndefined
  * 检查给定的值是否为 `undefined`。
  *
  * @param value 任意类型的值，将被检查是否为 `undefined`。
@@ -81,7 +79,7 @@ export const isFunction = (value: unknown): value is Function =>
 export const isUndefined = (value: unknown): value is undefined =>
   typeof value === 'undefined';
 
-/**
+/** isNull
  * 检查给定的值是否为 null
  *
  * @param value 未知类型的值，用于检查是否为 null
@@ -89,7 +87,7 @@ export const isUndefined = (value: unknown): value is undefined =>
  */
 export const isNull = (value: unknown): value is null => value === null;
 
-/**
+/** isDate
  * 检查给定的值是否为一个有效的日期对象
  *
  * @param value 未知类型的值，待检查是否为日期对象
@@ -98,7 +96,7 @@ export const isNull = (value: unknown): value is null => value === null;
 export const isDate = (value: unknown): value is Date =>
   value instanceof Date && !isNaN(value.getTime());
 
-/**
+/** isPromise
  * 判断给定的值是否为一个Promise对象
  *
  * @template T Promise解析后的类型
@@ -110,7 +108,7 @@ export const isPromise = <T>(value: unknown): value is Promise<T> =>
   (typeof value === 'object' || typeof value === 'function') && // 判断value是否为对象或函数类型，因为Promise是一个对象
   typeof (value as Promise<T>).then === 'function'; // 检查value是否具有then方法，这是Promise的特征
 
-/**
+/** isError
  * 判断给定的值是否为Error实例
  *
  * @param value 任意类型的值，用于判断是否为Error实例
@@ -122,7 +120,7 @@ export const isError = (value: unknown): value is Error =>
 export const isSymbol = (value: unknown): value is symbol =>
   typeof value === 'symbol';
 
-/**
+/** isNil
  * 检查给定的值是否为 null 或 undefined
  *
  * @param value 未知类型的值，待检查
@@ -131,7 +129,7 @@ export const isSymbol = (value: unknown): value is symbol =>
 export const isNil = (value: unknown): value is null | undefined =>
   value === null || value === undefined;
 
-/**
+/** isPrimitiveType
  * 判定给定的值是否为基础数据类型.
  *
  * 基础数据类型包括 string, number, bigInt, boolean, null, undefined, or symbol.
@@ -149,7 +147,7 @@ export const isPrimitiveType = (
   isNil(value) ||
   isSymbol(value);
 
-/**
+/** isNilOrNaN
  * 检查给定的值是否为 null、undefined 或 NaN
  *
  * @param value 任意类型的值，将被检查是否为 null、undefined 或 NaN
@@ -158,7 +156,7 @@ export const isPrimitiveType = (
 export const isNilOrNaN = (value: unknown): boolean =>
   isNil(value) || (typeof value === 'number' && isNaN(value));
 
-/**
+/** isTypeOrNil
  * 检查值是否为指定类型或者为null或undefined
  *
  * @param value 未知类型的值，待检查
@@ -170,7 +168,7 @@ export const isTypeOrNil = <T>(
   typeCheck: (value: unknown) => boolean,
 ): value is T | null | undefined => isNil(value) || typeCheck(value);
 
-/**
+/** isEmpty
  * 检查给定的值是否为空
  *
  * 此函数用于判断各种类型的值是否为空，包括但不限于对象、数组、字符串、数字和符号

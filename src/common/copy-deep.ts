@@ -1,12 +1,12 @@
 import { isArray, isDate, isPrimitiveType } from '../type-checks';
 
-/**
+/** copyDeep
  * 深拷贝一个对象或数组
  * @param source 要拷贝的源对象或数组
  * @param seen 用于处理循环引用的对象弱引用映射，默认为新的 WeakMap
  * @returns 返回深拷贝后的对象或数组
  */
-function copyDeep<T>(source: T, seen = new WeakMap()): T {
+const copyDeep = <T>(source: T, seen = new WeakMap()): T => {
   // 处理原始值和 null
   if (source === null || isPrimitiveType(source)) return source;
 
@@ -51,6 +51,6 @@ function copyDeep<T>(source: T, seen = new WeakMap()): T {
   });
 
   return result as T;
-}
+};
 
 export default copyDeep;

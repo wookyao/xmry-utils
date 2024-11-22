@@ -4,7 +4,7 @@ function slice(value: string, rule: string): string;
 function slice(value: unknown[], rule: string): unknown[];
 function slice(value: string | unknown[], rule: string): string | unknown[];
 
-/**
+/** slice
  * 一个自定义的切片函数，它能够按照指定规则处理字符串或数组。
  *
  * @param value - 要进行切片操作的字符串或数组。
