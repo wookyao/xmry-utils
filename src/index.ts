@@ -3,3 +3,4 @@ export * from './common';
 export * from './numbers';
 export * from './functions';
 export * from './strings';
+export * from './objects';
