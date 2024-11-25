@@ -1,4 +1,4 @@
-import { filterEmpty, pick } from '../objects';
+import { filterEmpty, pick, omit } from '../objects';
 import { isNilOrNaN } from '../type-checks';
 
 describe('objects', () => {
@@ -23,6 +23,13 @@ describe('objects', () => {
     });
 
     expect(pick(obj, ['c'], true)).not.toBe(obj.c);
+  });
+
+  test('omit', () => {
+    expect(omit(obj, ['a', 'b'])).toEqual({ c: { foo: 'bar' }, d: [1, 2, 3] });
+    expect(omit(obj, ['a', 'b', 'c'])).toEqual({
+      d: [1, 2, 3],
+    });
   });
 
   test('filterEmpty', () => {

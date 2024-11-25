@@ -14,7 +14,7 @@ type RegType = keyof typeof RegMap;
  *
  * type RegType = "Hex" | "CN_Phone" | "CN_ID_Card" | "CN_Post_Code" | "Email" |
  *                "CN" | "EN" | "NUM" | "NUM_INT" | "NUM_DECIMAL" | "NUM_DECIMAL_TWO" |
- *                "EN_NUM" | "CN_EN_NUM" | "CN_EN_NUM_LINE" | "CN_EN_NUM_LINE_HYPHEN"
+ *                "EN_NUM" | "CN_EN_NUM"
  *
  * @param value 要被验证的值，可以是任何类型
  * @param type 指定的类型，可以是字符串或正则表达式

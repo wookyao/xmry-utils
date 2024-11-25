@@ -11,7 +11,7 @@ describe('strings randomString function', () => {
     expect(upFirstLetter('1abc')).toBe('1abc');
   });
 
-  test('upFirstLetter check', () => {
+  test('lowFirstLetter check', () => {
     expect(lowFirstLetter('Abc')).toBe('abc');
     expect(lowFirstLetter('1abc')).toBe('1abc');
   });

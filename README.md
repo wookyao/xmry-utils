@@ -49,17 +49,28 @@ pnpm add @xmry/utils
     - [serialize()](#serialize)
     - [equal()](#equal)
     - [hex2Rgba()](#hex2Rgba)
+    - [validate()](#validate)
 
 - [number 模块](#number)
     - [limitNumber()](#limitNumber)
     - [rand()](#rand)
     - [toThousands()](#toThousands)
 
+- [strings 模块](#strings)
+    - [randomString()](#randomString)
+    - [upFirstLetter()](#upFirstLetter)
+    - [lowFirstLetter()](#lowFirstLetter)
+
 - [functions 模块](#number)
     - [debounce() 防抖]
     - [throttle() 节流]
     - [curry() 柯里化]
-    
+
+- [objects 模块](#objects)
+    - [omit()](#omit)
+    - [pick()](#pick)
+    - [filterEmpty()](#filterEmpty)
+
 
 ## 3.  用法
 
@@ -620,6 +631,77 @@ pnpm add @xmry/utils
   ```
 ---
 
+<p id="validate"></p>
+
+#### **validate(value: any, type: RegType | RegExp): boolean**
+> - *检查给定值是否符合指定的类型或格式*
+
+  ```typescript
+  import { validate } from '@xmry/utils';
+
+  validate('#000000', 'Hex')  // true
+  validate('#PUA250', 'Hex')  // false
+
+  validate('15256936288', 'CN_Phone')  // true
+  validate('138124578963', 'CN_Phone')  // false
+
+  validate('11000020200201', 'CN_ID_Card')  // false
+  validate('11000020200201507X', 'CN_ID_Card')  // true
+
+    // 中国大陆邮政编码正则
+  validate('110000', 'CN_Post_Code')  // true
+  validate('11000', 'CN_Post_Code')  // false
+  validate('11000A', 'CN_Post_Code')  // false
+
+  validate('9527@qq.com', 'Email')  // true
+  validate('StephenChow@gmail.com', 'Email')  // true
+
+    // 仅支持中文
+  validate('周星驰', 'CN')  // true
+  validate('周 星 驰', 'CN')  // false
+  validate('Stephen Chow@', 'CN')  // false
+    //  仅支持中文 + 空格
+  validate('周 星 驰', 'CN_Space')  // true
+
+    // 仅支持英文
+  validate('Stephen', 'EN')  // true
+  validate('Stephen Chow', 'CN')  // false
+    // 仅支持英文 + 空格
+  validate('Stephen Chow', 'EN_Space')  // true
+
+    // 仅支持数字 可以包括小数 也可以不包含小数
+  validate('Stephen Chow', 'NUM')  // false
+  validate(50, 'NUM')  // true
+  validate(-50.25, 'NUM')  // true
+
+    // 验证整数
+  validate(-50, 'NUM_INT')  // true
+  validate(-50.25, 'NUM_INT')  // false
+
+    // 验证小数 必须包含小数
+  validate(-50.25, 'NUM_DECIMAL')  // true
+  validate(-50, 'NUM_DECIMAL')  // false
+
+    // 验证两位小数
+  validate(-50, 'NUM_DECIMAL_TWO')  // false
+  validate(-50.25, 'NUM_DECIMAL_TWO')  // true
+  validate(-50.251, 'NUM_DECIMAL_TWO')  // false
+
+    // 验证中文数字混合
+  validate('hhh25', 'EN_NUM')  // true
+  validate(25, 'EN_NUM')  // true
+  validate('666', 'EN_NUM')  // true
+
+    // 验证中文英文数字
+  validate('125Q', 'CN_EN_NUM')  // true
+  validate('125Q!@#', 'CN_EN_NUM')  // false
+
+
+  // 验证正整数
+  validate(125, /^\d+$/) // true
+  ```
+---
+
 <p id="number"></p>
 
 ### 🚀 Number 
@@ -672,6 +754,118 @@ pnpm add @xmry/utils
   toThousands(1000.123)  //'1,000.123
   toThousands(1000.1)  //'1,000.1
   toThousands(1000.0)  //'1,000
+
+  ```
+---
+
+
+<p id="strings"></p>
+
+### 🚀 Strings 
+
+<p id="randomString"></p>
+
+#### **limitNumber(length: number, template?: string): string**
+> - *生成指定长度的随机字符串*
+
+  ```typescript
+  import { randomString } from '@xmry/utils';
+
+  const str = randomString(10)  // str.length === 10
+
+  const str = randomString(10, 'A')  // AAAAAAAAAA
+
+  ```
+---
+
+<p id="upFirstLetter"></p>
+
+#### **upFirstLetter(str: string): string**
+> - *将字符串的第一个字母转换为大写*
+
+  ```typescript
+  import { upFirstLetter } from '@xmry/utils';
+
+  upFirstLetter('abc')  // Abc
+  upFirstLetter('Abc')  // Abc
+  upFirstLetter('1abc')  // 1abc
+
+  ```
+---
+
+<p id="lowFirstLetter"></p>
+
+#### **lowFirstLetter(str: string): string**
+> - *将字符串的第一个字母转换为小写*
+
+  ```typescript
+  import { lowFirstLetter } from '@xmry/utils';
+
+  lowFirstLetter('abc')  // abc
+  lowFirstLetter('Abc')  // abc
+  lowFirstLetter('1abc')  // 1abc
+
+  ```
+---
+
+
+<p id="objects"></p>
+
+### 🚀 Objects 
+
+<p id="pick"></p>
+
+#### **pick\<T extends object, K extends keyof T\>(obj: T,keys: K[],deep?: boolean,): Pick\<T, K\>**
+> - *从一个对象中挑选出指定的属性*
+
+  ```typescript
+  import { omit } from '@xmry/utils';
+  const obj = { a: 1, b: 2, c: { foo: 'bar' }, d: [1, 2, 3] };
+
+  omit(obj, ['a', 'b'])  // { a: 1, b: 2 }
+  omit(obj, ['a', 'b', 'c'])  // { a: 1, b: 2, c: { foo: 'bar' } }
+  omit(obj, ['d'])  // { d: [1, 2, 3] }
+
+  ```
+---
+
+<p id="omit"></p>
+
+#### **omit\<T extends object, K extends keyof T\>(obj: T,keys: K[],deep?: boolean): Omit\<T, K\>**
+> - *从一个对象中省略指定的键*
+
+  ```typescript
+  import { omit } from '@xmry/utils';
+  const obj = { a: 1, b: 2, c: { foo: 'bar' }, d: [1, 2, 3] };
+
+  omit(obj, ['a', 'b'])  // { c: { foo: 'bar' }, d: [1, 2, 3] }
+  omit(obj, ['a', 'b', 'c'])  // { d: [1, 2, 3] }
+
+  ```
+---
+
+<p id="filterEmpty"></p>
+
+#### **filterEmpty\<T extends object, K extends keyof T\>(obj: T,empty: (value: T[K]) => boolean = (value) => value === undefined || value === null || value === ''): T**
+> - *过滤对象中为空的属性*
+
+  ```typescript
+  import { filterEmpty } from '@xmry/utils';
+  const obj = {
+    a: 0,
+    b: null,
+    c: undefined,
+    d: '',
+    e: false,
+    f: NaN,
+    g: '111',
+  };
+
+  filterEmpty(obj) // { a: 0, e: false, g: '111', f: NaN }
+
+  filterEmpty(obj, (value) => {
+    return isNilOrNaN(value) || value === '';
+  })  // { a: 0, e: false, g: '111' }
 
   ```
 ---
