@@ -1,4 +1,5 @@
-import { pick } from '../objects';
+import { filterEmpty, pick } from '../objects';
+import { isNilOrNaN } from '../type-checks';
 
 describe('objects', () => {
   const obj = { a: 1, b: 2, c: { foo: 'bar' }, d: [1, 2, 3] };
@@ -22,5 +23,25 @@ describe('objects', () => {
     });
 
     expect(pick(obj, ['c'], true)).not.toBe(obj.c);
+  });
+
+  test('filterEmpty', () => {
+    const obj = {
+      a: 0,
+      b: null,
+      c: undefined,
+      d: '',
+      e: false,
+      f: NaN,
+      g: '111',
+    };
+
+    expect(filterEmpty(obj)).toEqual({ a: 0, e: false, g: '111', f: NaN });
+
+    expect(
+      filterEmpty(obj, (value) => {
+        return isNilOrNaN(value) || value === '';
+      }),
+    ).toEqual({ a: 0, e: false, g: '111' });
   });
 });

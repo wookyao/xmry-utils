@@ -43,7 +43,6 @@ export function toThousands(num: any): string {
     num === -Infinity ||
     isNilOrNaN(num)
   ) {
-    console.log(num, 'num');
     throw new TypeError('输入应为有效数字');
   }
 

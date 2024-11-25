@@ -59,3 +59,27 @@ export const omit = <T extends object, K extends keyof T>(
 
   return result as Omit<T, K>;
 };
+
+/** filterEmpty
+ * 过滤对象中为空的属性
+ *
+ * @template T 要过滤的对象的类型
+ * @template K 对象属性的键的类型
+ * @param obj 要过滤的对象
+ * @param empty 一个函数，用于判断给定的属性值是否为空，默认情况下，空值包括 undefined、null 和空字符串
+ * @returns 返回一个新对象，其中不包含空值属性
+ */
+export const filterEmpty = <T extends object, K extends keyof T>(
+  obj: T,
+  empty: (value: T[K]) => boolean = (value) =>
+    value === undefined || value === null || value === '',
+): T => {
+  return Object.keys(obj).reduce((result, key) => {
+    const typedKey = key as K;
+    const value = obj[typedKey];
+    if (!empty(value)) {
+      result[typedKey] = value;
+    }
+    return result;
+  }, {} as Partial<T>) as T;
+};
