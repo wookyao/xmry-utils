@@ -5,6 +5,7 @@ import { sliceLoad } from './slice-load';
 import { equal } from './equal';
 import { serialize } from './serialize';
 import hex2Rgba from './hex2rgba';
+import validate from './validate';
 
 export {
   slice,
@@ -15,4 +16,5 @@ export {
   sliceLoad,
   serialize,
   hex2Rgba,
+  validate,
 };

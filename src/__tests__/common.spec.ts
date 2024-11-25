@@ -1,4 +1,12 @@
-import { copyOf, slice, copyDeep, serialize, equal, hex2Rgba } from '..';
+import {
+  copyOf,
+  slice,
+  copyDeep,
+  serialize,
+  equal,
+  hex2Rgba,
+  validate,
+} from '..';
 
 // 切片
 describe('slice', () => {
@@ -234,5 +242,67 @@ describe('hex2Rgba', () => {
   test('hex2Rgba', () => {
     expect(hex2Rgba('#f00')).toBe('rgba(255,0,0,1)');
     expect(hex2Rgba('#f00', 0.5)).toBe('rgba(255,0,0,0.5)');
+  });
+});
+
+// validate
+describe('validate', () => {
+  test('validate', () => {
+    expect(validate('#000000', 'Hex')).toBe(true);
+    expect(validate('#PUA250', 'Hex')).toBe(false);
+
+    expect(validate('15256936288', 'CN_Phone')).toBe(true);
+    expect(validate('138124578963', 'CN_Phone')).toBe(false);
+
+    expect(validate('11000020200201', 'CN_ID_Card')).toBe(false);
+    expect(validate('11000020200201507X', 'CN_ID_Card')).toBe(true);
+
+    // 中国大陆邮政编码正则
+    expect(validate('110000', 'CN_Post_Code')).toBe(true);
+    expect(validate('11000', 'CN_Post_Code')).toBe(false);
+    expect(validate('11000A', 'CN_Post_Code')).toBe(false);
+
+    expect(validate('9527@qq.com', 'Email')).toBe(true);
+    expect(validate('StephenChow@gmail.com', 'Email')).toBe(true);
+
+    // 仅支持中文
+    expect(validate('周星驰', 'CN')).toBe(true);
+    expect(validate('周 星 驰', 'CN')).toBe(false);
+    expect(validate('Stephen Chow@', 'CN')).toBe(false);
+    //  仅支持中文 + 空格
+    expect(validate('周 星 驰', 'CN_Space')).toBe(true);
+
+    // 仅支持英文
+    expect(validate('Stephen', 'EN')).toBe(true);
+    expect(validate('Stephen Chow', 'CN')).toBe(false);
+    // 仅支持英文 + 空格
+    expect(validate('Stephen Chow', 'EN_Space')).toBe(true);
+
+    // 仅支持数字 可以包括小数 也可以不包含小数
+    expect(validate('Stephen Chow', 'NUM')).toBe(false);
+    expect(validate(50, 'NUM')).toBe(true);
+    expect(validate(-50.25, 'NUM')).toBe(true);
+
+    // 验证整数
+    expect(validate(-50, 'NUM_INT')).toBe(true);
+    expect(validate(-50.25, 'NUM_INT')).toBe(false);
+
+    // 验证小数 必须包含小数
+    expect(validate(-50.25, 'NUM_DECIMAL')).toBe(true);
+    expect(validate(-50, 'NUM_DECIMAL')).toBe(false);
+
+    // 验证两位小数
+    expect(validate(-50, 'NUM_DECIMAL_TWO')).toBe(false);
+    expect(validate(-50.25, 'NUM_DECIMAL_TWO')).toBe(true);
+    expect(validate(-50.251, 'NUM_DECIMAL_TWO')).toBe(false);
+
+    // 验证中文数字混合
+    expect(validate('hhh25', 'EN_NUM')).toBe(true);
+    expect(validate(25, 'EN_NUM')).toBe(true);
+    expect(validate('666', 'EN_NUM')).toBe(true);
+
+    // 验证中文英文数字
+    expect(validate('125Q', 'CN_EN_NUM')).toBe(true);
+    expect(validate('125Q!@#', 'CN_EN_NUM')).toBe(false);
   });
 });
